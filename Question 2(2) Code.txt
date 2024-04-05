@@ -1,0 +1,61 @@
+/* 2. Before entering the Zoo, the security personnel should be able to validate the ticket i.e.,
+they should be able to see the guests and their age associated with the ticket and manually
+verify the guests who are trying to enter the Zoo.
+Your software should be able to take an issued ticket and display ticket details (a line for
+each guest on the ticket - person, age) so security personnel can confirm the guests before
+letting them enter the Zoo. Ex: If a ticket was issued for 2 guest (age 23 and 25), it should
+display:
+Guest 1 (age: 23)
+Guest 2 (age: 25)
+*/
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ZooTicketingSystem {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of guests:");
+        int numGuests = scanner.nextInt();
+        List<Ticket> tickets = new ArrayList<>();
+
+        for (int i = 0; i < numGuests; i++) {
+            System.out.println("Enter the age of guest " + (i + 1) + ":");
+            int age = scanner.nextInt();
+            Ticket ticket = new Ticket(age);
+            tickets.add(ticket);
+        }
+
+        System.out.println("Ticket details:");
+        for (Ticket ticket : tickets) {
+            System.out.println("Guest " + (tickets.indexOf(ticket) + 1) + " (age: " + ticket.getAge() + ")");
+        }
+
+        System.out.println("Enter the number of tickets to validate:");
+        int numTicketsToValidate = scanner.nextInt();
+
+        for (int i = 0; i < numTicketsToValidate; i++) {
+            System.out.println("Enter the ticket number to validate:");
+            int ticketNumber = scanner.nextInt();
+            if (ticketNumber >= 0 && ticketNumber < tickets.size()) {
+                Ticket ticket = tickets.get(ticketNumber);
+                System.out.println("Validating ticket for guest " + (ticketNumber + 1) + " (age: " + ticket.getAge() + ")");
+            } else {
+                System.out.println("Invalid ticket number.");
+            }
+        }
+    }
+}
+
+class Ticket {
+    private int age;
+
+    public Ticket(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}

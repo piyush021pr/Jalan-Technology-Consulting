@@ -1,0 +1,81 @@
+/*Question 2:
+Write a program to build ticketing software for a Zoo using Object Oriented Programming. If you are
+not familiar or comfortable with object-oriented programming, we suggest you give this article a
+quick read to ensure you understand it before you attempt it.
+It should have the following features:
+1. When the guests arrive at the entrance gate, the person at the ticketing counter should
+input the number of guests and age of each guest. The pricing depends on the age as
+follows:
+a. If age <= 2 years, entrance price is INR 0.
+b. If age > 2 and < 18 years, entrance price is INR 100.
+c. If age >= 18 and < 60 years, entrance price is INR 500.
+d. If age >= 60 years, entrance price is INR 300. */
+
+
+import java.util.Scanner;
+public class ZooTicket {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter the number of guests:");
+            int numGuests = scanner.nextInt();
+            int totalCharges = 0;
+
+            for (int i = 0; i < numGuests; i++) {
+                System.out.println("Enter the age of guest " + (i + 1) + ":");
+                int age = scanner.nextInt();
+                Ticket ticket = new Ticket(age);
+                System.out.println("Ticket for guest " + (i + 1) + ":");
+                System.out.println("Age: " + age);
+                System.out.println("Charges: " + ticket.getCharges());
+                totalCharges += ticket.getCharges();
+            }
+
+            System.out.println("Total charges: " + totalCharges);
+        }
+    }
+
+    class Ticket {
+        private int age;
+
+        public Ticket(int age) {
+            this.age = age;
+        }
+
+        public int getCharges() {
+            if (age <= 2) {
+                return 0;
+            } else if (age > 2 && age < 18) {
+                return 100;
+            } else if (age >= 18 && age < 60) {
+                return 500;
+            } else {
+                return 300;
+            }
+        }
+    }
+    
+    
+   /* OUTPUT:-
+    Enter the number of guests:
+4
+Enter the age of guest 1:
+2
+Ticket for guest 1:
+Age: 2
+Charges: 0
+Enter the age of guest 2:
+40
+Ticket for guest 2:
+Age: 40
+Charges: 500
+Enter the age of guest 3:
+59
+Ticket for guest 3:
+Age: 59
+Charges: 500
+Enter the age of guest 4:
+65
+Ticket for guest 4:
+Age: 65
+Charges: 300
+Total charges: 1300 */
